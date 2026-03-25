@@ -7,10 +7,6 @@ import {
 } from "react-native";
 // ── No external storage lib needed ─────────────────────────────────────────
 // Data lives in memory while the app is open.
-// To persist across restarts, install AsyncStorage and uncomment the lines below:
-//   npx expo install @react-native-async-storage/async-storage
-// Then swap the two storage functions at the bottom of this block.
-
 // ── Types ──────────────────────────────────────────────────────────────────
 type ToastType   = "success" | "error" | "info";
 type NotifType   = "success" | "error" | "info";
@@ -60,8 +56,6 @@ const isValidDate = (v: string) => /^\d{4}-\d{2}-\d{2}$/.test(v) && !isNaN(Date.
 const isValidTime = (v: string) => /^\d{1,2}:\d{2}\s*(AM|PM)$/i.test(v.trim());
 
 // ── Storage (in-memory — no install needed) ────────────────────────────────
-// To persist: npx expo install @react-native-async-storage/async-storage
-// then swap these two functions with AsyncStorage versions.
 const _store: Record<string, string> = {};
 async function loadData(): Promise<StoredState | null> {
   try { const raw = _store[STORAGE_KEY]; return raw ? (JSON.parse(raw) as StoredState) : null; } catch { return null; }
